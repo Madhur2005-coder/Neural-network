@@ -1,0 +1,51 @@
+# ------------------------------------------
+# Hebbian Learning: Coffee -> Alertness
+# Input : Coffee (1 = Yes, 0 = No)
+# Output: Alertness (1 = Yes, 0 = No)
+# ------------------------------------------
+
+learning_rate = 0.25
+weight = 0.0
+
+# Training Data (Coffee, Alertness)
+daily_data = [
+    (1,1),
+    (1,1),
+    (0,0),
+    (1,0),
+    (0,1),
+    (1,1),
+    (0,0)
+]
+
+print("Hebbian Learning: Coffee -> Alertness")
+print("------------------------------------------------")
+print("Day | Coffee | Alert | Delta_W | Weight")
+print("------------------------------------------------")
+
+# ---------------- TRAINING ----------------
+for day, (coffee, alert) in enumerate(daily_data, start=1):
+    
+    delta_w = learning_rate * coffee * alert
+    weight += delta_w
+    
+    print(f"{day:3} | {coffee:6} | {alert:5} | {delta_w:7.2f} | {weight:.2f}")
+
+print("------------------------------------------------")
+print(f"Final learned weight: {weight:.2f}")
+print("------------------------------------------------")
+
+
+# ---------------- TESTING ----------------
+print("\nTesting Phase")
+test_coffee = int(input("Did you drink coffee? (1=yes, 0=no): "))
+
+prediction = weight * test_coffee
+
+print("\nPrediction Value:", round(prediction, 2))
+
+# Optional Interpretation
+if prediction > 0:
+    print("Interpretation: Coffee increases alertness ")
+else:
+    print("Interpretation: No coffee → No alertness boost.")

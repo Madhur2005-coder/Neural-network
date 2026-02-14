@@ -1,0 +1,41 @@
+# Input: Song played? (1 = Yes, 0 = No)
+# Output: Feeling happy? (1 = Yes, 0 = No)
+
+learning_rate = 0.15
+weight = 0.0
+
+daily_data = [
+    (1,1),(1,0),(0,1),(1,1),(0,0),
+    (1,1),
+    
+]
+
+print("Hebbian Learning: Song -> Happy")
+print("-----------------------------------")
+print("Day | Song | Happy | Weight")
+print("-----------------------------------")
+
+for day, (song, happy) in enumerate(daily_data, start=1):
+    delta_w = learning_rate * song * happy
+    weight += delta_w
+    
+    print(f"{day:3} | {song:4} | {happy:5} | {weight:.2f}")
+
+print("-----------------------------------")
+print(f"Final learned weight: {weight:.2f}")
+print("-----------------------------------")
+
+# ---------------- TESTING ----------------
+print("\nTesting Phase")
+test_song = int(input("Did you listen to a song? (1=yes, 0=no): "))
+
+prediction = weight * test_song
+
+print(f"Prediction value: {prediction:.2f}")
+
+# Interpretation
+if prediction > 0:
+    print("Interpretation: Listening to songs increases happiness ")
+else:
+    print("Interpretation: No song → No happiness boost.")
+

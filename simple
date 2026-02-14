@@ -1,0 +1,40 @@
+learning_rate = 0.1
+weight = 0.5
+
+training_data = [
+    (1,1),
+    (1,1),
+    (1,0),
+    (0,1),
+    (1,1)
+]
+
+
+print("Hebbian Learning")
+print("---------------------")
+print("Initial weight:", weight)
+print()
+
+# Training phase
+for i, (x, y) in enumerate(training_data, start=1):
+    delta_w = learning_rate * x * y
+    weight += delta_w
+    
+    print(f"Step {i}")
+    print("Input (x,y):", (x, y))
+    print("Weight update (Δw):", delta_w)
+    print("Updated weight:", weight)
+    print()
+
+print("Final weight after training:", weight)
+print("---------------------")
+
+# Testing phase
+test_x = int(input("Enter test x: "))
+test_y = int(input("Enter test y: "))
+
+output = weight * test_x  # simple single-weight model
+
+print("\nTesting")
+print("Test Input:", (test_x, test_y))
+print("Output (weight * test_x):", output)

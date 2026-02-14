@@ -1,0 +1,49 @@
+#traffic light ->go action
+
+# ------------------------------------------
+# Hebbian Learning: Traffic Light -> Go Action
+# Input : Green Light (1 = Yes, 0 = No)
+# Output: Go Action (1 = Yes, 0 = No)
+# ------------------------------------------
+
+learning_rate = 0.1
+weight = 0.0
+
+# Training Data (Green Light, Go Action)
+traffic_data = [
+    (1,1),  # Green -> Go
+    (0,0),  # Red -> Stop
+    (1,1),  # Green -> Go
+    (0,0),  # Red -> Stop
+    (1,1)   # Green -> Go
+]
+
+print("Hebbian Learning: Traffic Light -> Go Action")
+print("------------------------------------------------")
+print("Day | Green | Go | Delta_W | Weight")
+print("------------------------------------------------")
+
+# ---------------- TRAINING ----------------
+for day, (green, go) in enumerate(traffic_data, start=1):
+    delta_w = learning_rate * green * go
+    weight += delta_w
+    
+    print(f"{day:3} | {green:5} | {go:2} | {delta_w:7.2f} | {weight:.2f}")
+
+print("------------------------------------------------")
+print(f"Final learned weight: {weight:.2f}")
+print("------------------------------------------------")
+
+# ---------------- TESTING ----------------
+print("\nTesting Phase")
+test_green = int(input("Is the light green? (1=yes, 0=no): "))
+
+prediction = weight * test_green
+
+print("\nPrediction Value:", round(prediction, 2))
+
+# Optional Interpretation
+if prediction > 0:
+    print("Interpretation: Green light → Go action ")
+else:
+    print("Interpretation: Not green → No go action ")
